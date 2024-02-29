@@ -59,4 +59,6 @@ exec geth \
     --rollup.disabletxpoolgossip=true \
     --rollup.sequencerhttp="https://sequencer.blast.io" \
     --port="30303" \
+    --log.file="/geth-logs/gethlog.log" \
+    --log.rotate="true" \
     $ADDITIONAL_ARGS

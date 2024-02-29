@@ -5,6 +5,7 @@ services:
       dockerfile: geth/Dockerfile
     volumes:
       - /var/lib/blast:/blast
+      - ${PWD}/geth-logs:/geth-logs
     ports:
       - 127.0.0.1:9545:8545 # http rpc
       - 127.0.0.1:9546:8546 # ws rpc

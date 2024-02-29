@@ -25,6 +25,7 @@ if [ ! -d "$GETH_CHAINDATA_DIR" ]; then
 	echo "Initializing genesis."
 	geth --verbosity="$VERBOSITY" init \
 		--datadir="$GETH_DATA_DIR" \
+    --state.scheme=path \
 		"$GENESIS_FILE_PATH"
 else
 	echo "$GETH_CHAINDATA_DIR exists."

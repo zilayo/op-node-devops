@@ -1,0 +1,37 @@
+services:
+  blast-geth:
+    build:
+      context: .
+      dockerfile: geth/Dockerfile
+    volumes:
+      - /var/lib/blast:/blast
+    ports:
+      - 127.0.0.1:9545:8545 # http rpc
+      - 127.0.0.1:9546:8546 # ws rpc
+      - 127.0.0.1:9551:9551 # engine auth
+      - 31303:30303 # p2p
+      - 31303:30303/udp # p2p
+    networks:
+      - blast-net
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+
+  op-node:
+    build:
+      context: .
+      dockerfile: op-node/Dockerfile
+    volumes:
+      - /var/lib/blast:/blast
+    ports:
+      - '9222:9222' # p2p
+      - '9222:9222/udp' # p2p
+    depends_on:
+      - blast-geth
+    networks:
+      - blast-net
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+
+networks:
+  blast-net:
+    driver: bridge

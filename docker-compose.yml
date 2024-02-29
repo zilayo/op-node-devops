@@ -12,7 +12,7 @@ services:
       - 31303:30303 # p2p
       - 31303:30303/udp # p2p
     networks:
-      - blast-net
+      - blast-network
     extra_hosts:
       - 'host.docker.internal:host-gateway'
 
@@ -28,10 +28,14 @@ services:
     depends_on:
       - blast-geth
     networks:
-      - blast-net
+      - blast-network
     extra_hosts:
       - 'host.docker.internal:host-gateway'
 
 networks:
-  blast-net:
-    driver: bridge
+  blast-network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1

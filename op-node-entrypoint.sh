@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -eu
 
 L1_RPC_URL="http://host.docker.internal:8545"

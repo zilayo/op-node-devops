@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -eu
 
 VERBOSITY=3
@@ -6,6 +6,7 @@ GETH_DATA_DIR=/blast/data
 GETH_CHAINDATA_DIR="{$GETH_DATA_DIR}/geth/chaindata"
 GENESIS_FILE_PATH="${GENESIS_FILE_PATH:-/genesis.json}"
 ADDITIONAL_ARGS=""
+CHAIN_ID=81457
 
 mkdir -p $GETH_DATA_DIR
 

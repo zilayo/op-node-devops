@@ -46,10 +46,10 @@ services:
       - '127.0.0.1:9092:9090' # metrics
     command:
       - --config.file=/etc/prometheus/prometheus.yml
-      - --storage.tsdb.path=/prometheusdata
+      - --storage.tsdb.path=/prometheus
     volumes:
       - ${PWD}/prometheus/:/etc/prometheus/
-      - prometheus_data:/prometheusdata
+      - prometheus_data:/prometheus
     restart: unless-stopped
     depends_on:
       - blast-geth

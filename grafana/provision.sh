@@ -9,7 +9,7 @@ if [ $? -ne 0 ]; then
     echo "Failed to remove old dashboards"
 fi
 
-sudo cp -r "${source_dashboards}" "${target_dashboards}"
+sudo rsync -a "${source_dashboards}/" "${target_dashboards}/"
 
 if [ $? -eq 0 ]; then
     echo "Dashboards copied successfully."

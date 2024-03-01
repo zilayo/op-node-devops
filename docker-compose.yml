@@ -9,9 +9,10 @@ services:
     ports:
       - 127.0.0.1:9545:8545 # http rpc
       - 127.0.0.1:9546:8546 # ws rpc
-      - 127.0.0.1:9551:9551 # engine auth
+      - 127.0.0.1:9551:8551 # engine auth
       - 31303:30303 # p2p
       - 31303:30303/udp # p2p
+      - 127.0.0.1:6060:6060 # metrics
     networks:
       - blast-network
     extra_hosts:
@@ -26,6 +27,7 @@ services:
     ports:
       - '9222:9222' # p2p
       - '9222:9222/udp' # p2p
+      - 127.0.0.1:7300:7300 # metrics
     depends_on:
       - blast-geth
     networks:

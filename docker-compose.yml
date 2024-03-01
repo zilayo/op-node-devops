@@ -17,6 +17,8 @@ services:
       - blast-network
     extra_hosts:
       - 'host.docker.internal:host-gateway'
+    restart: unless-stopped
+    stop_grace_period: 5m
 
   op-node:
     build:
@@ -34,6 +36,26 @@ services:
       - blast-network
     extra_hosts:
       - 'host.docker.internal:host-gateway'
+    restart: unless-stopped
+    stop_grace_period: 5m
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - '127.0.0.1:9091:9090' # metrics
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheusdata
+    volumes:
+      - ${PWD}/prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheusdata
+    restart: unless-stopped
+    depends_on:
+      - blast-geth
+      - op-node
+    networks:
+      - blast-network
 
 networks:
   blast-network:
@@ -42,3 +64,6 @@ networks:
       config:
         - subnet: 172.20.0.0/16
           gateway: 172.20.0.1
+
+volumes:
+  prometheus_data:

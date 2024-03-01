@@ -18,3 +18,8 @@ logs:
 .PHONY: down
 down:
 	docker compose down
+
+.PHONY: grafana-prov
+grafana-prov:
+	chmod +x ./grafana/provision.sh
+	./grafana/provision.sh

@@ -1,0 +1,12 @@
+apiVersion: 1
+
+providers:
+- name: 'L1 Ethereum (Reth + Lighthouse) Dashboards'
+  options:
+    path: /etc/grafana/provisioning/dashboards/l1
+    foldersFromFilesStructure: true
+
+- name: 'L2 Blast Dashboards'
+  options:
+    path: /etc/grafana/provisioning/dashboards/l2
+    foldersFromFilesStructure: true

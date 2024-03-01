@@ -9,7 +9,7 @@ datasources:
 - name: Prometheus-docker
   type: prometheus
   access: proxy
-  url: http://localhost:9091
+  url: http://localhost:9092
   editable: true
 
 - name: Prometheus

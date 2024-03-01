@@ -1,6 +1,5 @@
 #!/bin/sh
 set -eu
-
 VERBOSITY=3
 GETH_DATA_DIR=/blast/data
 GETH_CHAINDATA_DIR="${GETH_DATA_DIR}/geth/chaindata"
@@ -10,13 +9,21 @@ CHAIN_ID=81457
 
 mkdir -p $GETH_DATA_DIR
 
-sh -c "[ ! -f /blast/jwt.txt ] && openssl rand -hex 32 | tr -d '\n' > /blast/jwt.txt"
+echo "Checking if /blast/jwt.txt exists..."
+if [ ! -f /blast/jwt.txt ]; then
+    echo "File /blast/jwt.txt does not exist, generating random jwt.txt"
+    openssl rand -hex 32 | tr -d '\n' > /blast/jwt.txt
+else
+    echo "File /blast/jwt.txt already exists"
+fi
 
 if [ "${OP_GETH_ETH_STATS+x}" = x ]; then
+	echo "ETH Stats enabled"
     ADDITIONAL_ARGS="$ADDITIONAL_ARGS --ethstats=$OP_GETH_ETH_STATS"
 fi
 
 if [ "${OP_GETH_BOOTNODES+x}" = x ]; then
+	echo "GETH Bootnodes configured"
     ADDITIONAL_ARGS="$ADDITIONAL_ARGS --bootnodes=$OP_GETH_BOOTNODES"
 fi
 

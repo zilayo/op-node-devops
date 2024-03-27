@@ -42,5 +42,5 @@ COPY ./geth-entrypoint.sh .
 RUN chmod +x geth-entrypoint.sh
 COPY ./genesis.json .
 COPY ./rollup.json .
-COPY --from=op-node /app/op-node/bin/op-node ./
-COPY --from=geth /app/build/bin/geth ./
+COPY --from=op-node /app/op-node/bin/op-node /usr/local/bin
+COPY --from=geth /app/build/bin/geth /usr/local/bin

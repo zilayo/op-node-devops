@@ -26,7 +26,7 @@ else
 	echo "$GETH_CHAINDATA_DIR exists."
 fi
 
-exec ./geth \
+exec geth \
     --datadir="$GETH_DATA_DIR" \
     --network="base-mainnet" \
     --verbosity="$VERBOSITY" \

@@ -1,6 +1,6 @@
 #!/bin/sh
 set -eu
-VERBOSITY=3
+VERBOSITY=4
 GETH_DATA_DIR=/base/data
 GETH_CHAINDATA_DIR="${GETH_DATA_DIR}/geth/chaindata"
 GENESIS_FILE_PATH="${GENESIS_FILE_PATH:-genesis.json}"

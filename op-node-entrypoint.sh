@@ -3,7 +3,7 @@ set -eu
 
 L1_RPC_URL="http://host.docker.internal:8545"
 L1_BEACON_URL="http://host.docker.internal:5052"
-L2_ENGINE_URL="http://geth:8551"
+L2_ENGINE_URL="http://op-geth:8551"
 
 until [ "$(curl -s -w '%{http_code}' -o /dev/null ${L2_ENGINE_URL})" -eq 401 ]; do
   echo "waiting for geth to be ready"
@@ -13,6 +13,7 @@ done
 PUBLIC_IP=$(curl -s v4.ident.me)
 
 exec op-node \
+  --verbosity="4" \
   --network="base-mainnet" \
   --l2.jwt-secret="/base/jwt.txt" \
   --l1="${L1_RPC_URL}" \

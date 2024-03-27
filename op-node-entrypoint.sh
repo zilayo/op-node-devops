@@ -13,6 +13,7 @@ done
 PUBLIC_IP=$(curl -s v4.ident.me)
 
 exec op-node \
+  --network="base-mainnet" \
   --l2.jwt-secret="/base/jwt.txt" \
   --l1="${L1_RPC_URL}" \
   --l1.trustrpc=true \

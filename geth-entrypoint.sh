@@ -27,8 +27,8 @@ else
 fi
 
 exec geth \
+    --op-network="base-mainnet" \
     --datadir="$GETH_DATA_DIR" \
-    --network="base-mainnet" \
     --verbosity="$VERBOSITY" \
     --http \
     --http.corsdomain="*" \

@@ -6,11 +6,6 @@ start:
 stop:
 	docker compose stop
 
-.PHONY: clean
-clean:
-	sudo rm -rf geth-logs
-	sudo rm -rf /var/lib/blast
-
 .PHONY: logs
 logs:
 	docker compose logs -n 200 -f
@@ -18,8 +13,3 @@ logs:
 .PHONY: down
 down:
 	docker compose down
-
-.PHONY: grafana-prov
-grafana-prov:
-	chmod +x ./grafana/provision.sh
-	./grafana/provision.sh

@@ -1,69 +1,52 @@
 services:
-  blast-geth:
+  op-geth:
     build:
       context: .
       dockerfile: geth/Dockerfile
     volumes:
-      - /var/lib/blast:/blast
-      - ${PWD}/geth-logs:/geth-logs
+      - base:/base
     ports:
-      - 127.0.0.1:9545:8545 # http rpc
-      - 127.0.0.1:9546:8546 # ws rpc
-      - 127.0.0.1:9551:8551 # engine auth
-      - 31303:30303 # p2p
-      - 31303:30303/udp # p2p
-      - 127.0.0.1:6060:6060 # metrics
+      - 127.0.0.1:9545:9545 # http rpc
+      - 127.0.0.1:9546:9546 # ws rpc
+      - 30305:30305 # p2p
+      - 30305:30305/udp # p2p
+      - 127.0.0.1:5060:5060 # metrics
     networks:
-      - blast-network
+      - base
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     restart: unless-stopped
     stop_grace_period: 5m
+    command: ['bash', './geth-entrypoint.sh']
 
   op-node:
     build:
       context: .
       dockerfile: op-node/Dockerfile
     volumes:
-      - /var/lib/blast:/blast
+      - base:/base
     ports:
-      - '9222:9222' # p2p
-      - '9222:9222/udp' # p2p
-      - 127.0.0.1:7300:7300 # metrics
+      - '9005:9005' # p2p
+      - '9005:9005/udp' # p2p
+      - 127.0.0.1:5065:5065 # metrics
+      - 127.0.0.1:9550:9550 # RPC port
     depends_on:
-      - blast-geth
+      - op-geth
     networks:
-      - blast-network
+      - base
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     restart: unless-stopped
     stop_grace_period: 5m
-
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: prometheus
-    ports:
-      - '127.0.0.1:9092:9090' # metrics
-    command:
-      - --config.file=/etc/prometheus/prometheus.yml
-      - --storage.tsdb.path=/prometheus
-    volumes:
-      - ${PWD}/prometheus/:/etc/prometheus/
-      - prometheus_data:/prometheus
-    restart: unless-stopped
-    depends_on:
-      - blast-geth
-      - op-node
-    networks:
-      - blast-network
+    command: ['bash', './op-node-entrypoint.sh']
 
 networks:
-  blast-network:
+  base:
     ipam:
       driver: default
       config:
-        - subnet: 172.20.0.0/16
-          gateway: 172.20.0.1
+        - subnet: 172.21.0.0/16
+          gateway: 172.21.0.1
 
 volumes:
-  prometheus_data:
+  base:

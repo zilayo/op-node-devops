@@ -1,1 +1,1 @@
-# Blast Node Devops
+# Node devops for op-node chains

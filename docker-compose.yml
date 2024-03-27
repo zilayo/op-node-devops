@@ -1,8 +1,6 @@
 services:
   op-geth:
-    build:
-      context: .
-      dockerfile: geth/Dockerfile
+    build: .
     volumes:
       - base:/base
     ports:
@@ -20,9 +18,7 @@ services:
     command: ['bash', './geth-entrypoint.sh']
 
   op-node:
-    build:
-      context: .
-      dockerfile: op-node/Dockerfile
+    build: .
     volumes:
       - base:/base
     ports:

@@ -3,7 +3,7 @@ set -eu
 
 L1_RPC_URL="http://host.docker.internal:8545"
 L1_BEACON_URL="http://host.docker.internal:5052"
-L2_ENGINE_URL="http://op-geth:8551"
+L2_ENGINE_URL="http://op-reth:8551"
 
 until [ "$(curl -s -w '%{http_code}' -o /dev/null ${L2_ENGINE_URL})" -eq 401 ]; do
   echo "waiting for geth to be ready"
@@ -25,7 +25,7 @@ exec op-node \
   --metrics.port="5065" \
   --rpc.addr="0.0.0.0" \
   --rpc.port="9550" \
-  --p2p.advertise.ip=${PUBLIC_IP} \
+  --p2p.advertise.ip="${PUBLIC_IP}" \
   --p2p.listen.ip="0.0.0.0" \
   --p2p.listen.tcp="9005" \
   --p2p.listen.udp="9005" \

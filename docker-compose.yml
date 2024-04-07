@@ -1,5 +1,5 @@
 services:
-  op-geth:
+  op-reth:
     build: .
     volumes:
       - base:/base
@@ -15,7 +15,7 @@ services:
       - 'host.docker.internal:host-gateway'
     restart: unless-stopped
     stop_grace_period: 5m
-    command: ['bash', './geth-entrypoint.sh']
+    command: ['bash', './reth-entrypoint.sh']
 
   op-node:
     build: .
@@ -27,7 +27,7 @@ services:
       - 127.0.0.1:5065:5065 # metrics
       - 127.0.0.1:9550:9550 # RPC port
     depends_on:
-      - op-geth
+      - op-reth
     networks:
       - base
     extra_hosts:

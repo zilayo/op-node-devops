@@ -30,7 +30,7 @@ RUN cd op-node && \
 # Build the final layer & copy node binaries
 FROM debian:bullseye-slim
 RUN apt-get update && \
-  apt-get install -y jq curl openssl bash ca-certificates lsof && \
+  apt-get install -y jq curl openssl bash ca-certificates lsof g++ gcc libc6-dev && \
   rm -rf /var/lib/apt/lists
 COPY ./op-node-entrypoint.sh .
 RUN chmod +x op-node-entrypoint.sh

@@ -13,8 +13,7 @@ RUN git clone $REPO --branch $VERSION --single-branch . && \
   git switch -c branch-$VERSION && \
   bash -c '[ "$(git rev-parse HEAD)" = "$COMMIT" ]'
 ENV RUSTFLAGS="-C target-cpu=native"
-RUN cargo build --profile maxperf --bin op-reth --features "optimism,jemalloc,asm-keccak"
-RUN cp ./target/maxperf/op-reth /reth/op-reth
+RUN cargo build --profile maxperf --bin op-reth --features "optimism,jemalloc"
 
 # Build the op-node layer
 FROM golang:1.21 as op-node

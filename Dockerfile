@@ -28,9 +28,9 @@ RUN cd op-node && \
   make VERSION=$VERSION op-node
 
 # Build the final layer & copy node binaries
-FROM debian:bullseye-slim
+FROM golang:1.21
 RUN apt-get update && \
-  apt-get install -y jq curl openssl bash ca-certificates lsof g++ gcc libc6-dev && \
+  apt-get install -y jq curl openssl bash ca-certificates lsof && \
   rm -rf /var/lib/apt/lists
 COPY ./op-node-entrypoint.sh .
 RUN chmod +x op-node-entrypoint.sh

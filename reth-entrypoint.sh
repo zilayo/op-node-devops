@@ -27,7 +27,6 @@ exec op-reth node \
     --http.api="web3,debug,eth,net,trace" \
     --authrpc.addr=0.0.0.0 \
     --authrpc.port="8551" \
-    --authrpc.vhosts="*" \
     --authrpc.jwtsecret="/base/jwt.txt" \
     --ws \
     --ws.addr="0.0.0.0" \

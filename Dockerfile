@@ -39,4 +39,4 @@ RUN chmod +x reth-entrypoint.sh
 COPY ./genesis.json .
 COPY ./rollup.json .
 COPY --from=op-node /app/op-node/bin/op-node /usr/local/bin
-COPY --from=reth-builder /app/reth/target/maxperf/op-reth /usr/local/bin
+COPY --from=reth-builder /app/target/maxperf/op-reth /usr/local/bin

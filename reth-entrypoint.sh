@@ -16,7 +16,7 @@ else
     echo "File /base/jwt.txt already exists"
 fi
 
-exec op-reth \
+exec op-reth node \
     --chain "base" \
     --rollup.sequencer-http "https://mainnet-sequencer.base.org" \
     --datadir="$RETH_DATA_DIR" \

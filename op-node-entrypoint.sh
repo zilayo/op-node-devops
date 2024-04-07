@@ -6,7 +6,7 @@ L1_BEACON_URL="http://host.docker.internal:5052"
 L2_ENGINE_URL="http://op-reth:8551"
 
 until [ "$(curl -s -w '%{http_code}' -o /dev/null ${L2_ENGINE_URL})" -eq 401 ]; do
-  echo "waiting for geth to be ready"
+  echo "waiting for op-reth to be ready"
   sleep 5
 done
 

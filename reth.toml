@@ -86,3 +86,6 @@ nanos = 0
 [sessions.protocol_breach_request_timeout]
 secs = 120
 nanos = 0
+
+[prune]
+block_interval = 999999999

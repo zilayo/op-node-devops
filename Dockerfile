@@ -7,8 +7,8 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 FROM base as reth-builder
 WORKDIR /app
 ENV REPO=https://github.com/paradigmxyz/reth.git
-ENV VERSION=v0.2.0-beta.5
-ENV COMMIT=54f75cdcc82125a97ffd82952c2a8bc8ed324b48
+ENV VERSION=v0.2.0-beta.7
+ENV COMMIT=a44e0857373cee447c3823608194ccac53509140
 RUN git clone $REPO --branch $VERSION --single-branch . && \
   git switch -c branch-$VERSION && \
   bash -c '[ "$(git rev-parse HEAD)" = "$COMMIT" ]'
@@ -19,8 +19,8 @@ RUN cargo build --profile maxperf --bin op-reth --features "optimism,jemalloc"
 FROM golang:1.21 as op-node
 WORKDIR /app
 ENV REPO=https://github.com/ethereum-optimism/optimism.git
-ENV VERSION=v1.7.1
-ENV COMMIT=c87a469d7d679e8a4efbace56c3646b925bcc009
+ENV VERSION=v1.7.6
+ENV COMMIT=4a487b8920daa9dc4b496d691d5f283f9bb659b1
 RUN git clone $REPO --branch op-node/$VERSION --single-branch . && \
   git switch -c branch-$VERSION && \
   bash -c '[ "$(git rev-parse HEAD)" = "$COMMIT" ]'

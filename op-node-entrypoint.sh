@@ -8,7 +8,7 @@ L2_ENGINE_URL="ws://op-reth:8551"
 PUBLIC_IP=$(curl -s v4.ident.me)
 # TODO check the --network flag
 exec op-node \
-  --log.level="info" \
+  --log.level="$OP_LOG_LEVEL" \
   --l2.jwt-secret="/chain_data/jwt.txt" \
   --l1="${L1_RPC_URL}" \
   --l1.trustrpc=true \

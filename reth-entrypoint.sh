@@ -4,7 +4,7 @@ RETH_DATA_DIR=/chain_data/data
 CONFIG_PATH="./reth.toml"
 GENESIS_PATH="./genesis.json"
 
-export RUST_LOG="info"
+export RUST_LOG="${RETH_LOG_LEVEL}"
 export RUST_LOG_TARGET=1
 
 mkdir -p $RETH_DATA_DIR

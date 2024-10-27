@@ -9,10 +9,10 @@ RUN git clone $REPO --branch $VERSION --single-branch . && \
   git switch -c branch-$VERSION && \
   bash -c '[ "$(git rev-parse HEAD)" = "$COMMIT" ]'
 ENV RUSTFLAGS="-C target-cpu=native"
-RUN cargo build --profile maxperf --bin op-reth --features "optimism,jemalloc,asm-keccak"
+RUN cargo build --profile maxperf --bin op-reth --features "optimism,jemalloc,asm-keccak" --manifest-path crates/optimism/bin/Cargo.toml
 
 # Build the op-node layer
-FROM golang:1.23.2 as op-node
+FROM golang:1.23.2 AS op-node
 WORKDIR /app
 ENV REPO=https://github.com/ethereum-optimism/optimism.git
 ENV VERSION=v1.9.4

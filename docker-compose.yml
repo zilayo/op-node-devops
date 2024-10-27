@@ -2,7 +2,7 @@ services:
   op-reth:
     build: .
     volumes:
-      - base:/base
+      - chain_data:/chain_data
     ports:
       - 127.0.0.1:9545:9545 # http rpc
       - 127.0.0.1:9546:9546 # ws rpc
@@ -10,34 +10,47 @@ services:
       - 30305:30305/udp # p2p
       - 127.0.0.1:5060:5060 # metrics
     networks:
-      - base
+      - blockchain_node
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     restart: unless-stopped
     stop_grace_period: 5m
     command: ['bash', './reth-entrypoint.sh']
+    env_file:
+      - .env
+    healthcheck:
+      start_interval: 5s
+      start_period: 240s
+      test: wget --no-verbose --tries=1 --spider http://localhost:9545 || exit 1
 
   op-node:
     build: .
     volumes:
-      - base:/base
+      - chain_data:/chain_data
     ports:
       - '9005:9005' # p2p
       - '9005:9005/udp' # p2p
       - 127.0.0.1:5065:5065 # metrics
       - 127.0.0.1:9550:9550 # RPC port
     depends_on:
-      - op-reth
+      op-reth:
+        condition: 'service_healthy'
     networks:
-      - base
+      - blockchain_node
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     restart: unless-stopped
     stop_grace_period: 5m
     command: ['bash', './op-node-entrypoint.sh']
+    env_file:
+      - .env
+    healthcheck:
+      start_interval: 5s
+      start_period: 240s
+      test: wget --no-verbose --tries=1 --spider http://localhost:9550 || exit 1
 
 networks:
-  base:
+  blockchain_node:
     ipam:
       driver: default
       config:
@@ -45,4 +58,4 @@ networks:
           gateway: 172.21.0.1
 
 volumes:
-  base:
+  chain_data:

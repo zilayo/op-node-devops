@@ -1,6 +1,9 @@
+include .env
+export $(shell sed 's/=.*//' .env)
+
 .PHONY: start
 start:
-	docker compose up -d $(ARGS)
+	docker compose up -d -p $(CHAIN_NAME) $(ARGS)
 
 .PHONY: stop
 stop:

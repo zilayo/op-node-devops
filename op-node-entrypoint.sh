@@ -27,7 +27,7 @@ exec op-node \
   --verifier.l1-confs=4 \
   --rollup.load-protocol-versions=true \
   --syncmode "execution-layer" \
-  --p2p.bootnodes="$OP_NODE_BOOTNODES" \
+  --p2p.bootnodes="$CONSENSUS_BOOTNODES" \
   --l2.enginekind="reth" \
   --p2p.discovery.path="/chain_data/op_node_discovery" \
   --p2p.peerstore.path="/chain_data/op_node_peerstore" \

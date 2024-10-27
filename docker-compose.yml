@@ -21,7 +21,19 @@ services:
     healthcheck:
       start_interval: 5s
       start_period: 240s
-      test: wget --no-verbose --tries=1 --spider http://localhost:9545 || exit 1
+      test:
+        [
+          'CMD',
+          'curl',
+          '-s',
+          '-X',
+          'POST',
+          '-H',
+          'Content-Type: application/json',
+          '--data',
+          '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}',
+          'http://localhost:9545',
+        ]
 
   op-node:
     build: .
@@ -44,10 +56,6 @@ services:
     command: ['bash', './op-node-entrypoint.sh']
     env_file:
       - .env
-    healthcheck:
-      start_interval: 5s
-      start_period: 240s
-      test: wget --no-verbose --tries=1 --spider http://localhost:9550 || exit 1
 
 networks:
   blockchain_node:

@@ -16,3 +16,7 @@ logs:
 .PHONY: down
 down:
 	docker compose -p $(CHAIN_NAME) down
+
+.PHONY: build
+build:
+	docker compose -p $(CHAIN_NAME) build

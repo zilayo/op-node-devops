@@ -7,12 +7,12 @@ start:
 
 .PHONY: stop
 stop:
-	docker compose stop
+	docker compose -p $(CHAIN_NAME) stop
 
 .PHONY: logs
 logs:
-	docker compose logs -n 200 -f
+	docker compose -p $(CHAIN_NAME) logs -n 200 -f
 
 .PHONY: down
 down:
-	docker compose down
+	docker compose -p $(CHAIN_NAME) down

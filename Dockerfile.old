@@ -1,13 +1,5 @@
 # Build the op-reth layers
-FROM rust:1.82 AS reth
-WORKDIR /app
-RUN apt-get update && apt-get -y upgrade && apt-get install -y git libclang-dev pkg-config curl build-essential
-ENV REPO=https://github.com/zilayo/reth.git
-ENV VERSION=zil-dev
-ENV RUSTFLAGS="-C target-cpu=native"
-RUN git clone $REPO --branch $VERSION --single-branch . && \
-  cargo build --bin op-reth --features "optimism,jemalloc,asm-keccak" --manifest-path crates/optimism/bin/Cargo.toml && \
-  mv /app/target/debug/op-reth /usr/local/bin/op-reth
+FROM ghcr.io/paradigmxyz/op-reth:v1.1.0 AS reth
 
 # Build the op-node layer
 FROM us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.9.4 AS op-node

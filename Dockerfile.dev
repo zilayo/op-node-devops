@@ -9,7 +9,7 @@ ENV RUSTFLAGS="-C target-cpu=native"
 RUN git clone $REPO . && \
   git fetch --depth 1 origin $COMMIT && git checkout $COMMIT && \
   cargo build --profile maxperf --bin op-reth --features "optimism,jemalloc,asm-keccak" --manifest-path crates/optimism/bin/Cargo.toml && \
-  mv /app/target/debug/op-reth /usr/local/bin/op-reth
+  mv /app/target/maxperf/op-reth /usr/local/bin/op-reth
 
 # Build the op-node layer
 FROM us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.9.4 AS op-node

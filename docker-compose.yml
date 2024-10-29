@@ -40,7 +40,9 @@ services:
         ]
 
   op-node:
-    build: .
+    build:
+      context: '.'
+      dockerfile: 'Dockerfile'
     volumes:
       - chain_data:/chain_data
     ports:

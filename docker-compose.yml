@@ -1,6 +1,8 @@
 services:
   op-reth:
-    build: .
+    build:
+      context: '.'
+      dockerfile: 'Dockerfile'
     volumes:
       - chain_data:/chain_data
     ports:

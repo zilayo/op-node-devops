@@ -1,4 +1,4 @@
-# Build the op-reth layers
+# Build the op-reth layer
 FROM rust:1.82 AS reth
 WORKDIR /app
 RUN apt-get update && apt-get -y upgrade && apt-get install -y git libclang-dev pkg-config curl build-essential

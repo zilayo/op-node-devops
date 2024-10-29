@@ -6,8 +6,10 @@ services:
     ports:
       - 127.0.0.1:9545:9545 # http rpc
       - 127.0.0.1:9546:9546 # ws rpc
-      - 30305:30305 # p2p
+      - 30305:30305/tcp # p2p
       - 30305:30305/udp # p2p
+      - 9004:9004/tcp # discv5
+      - 9004:9004/udp # discv5
       - 127.0.0.1:5060:5060 # metrics
     networks:
       - blockchain_node
@@ -40,7 +42,7 @@ services:
     volumes:
       - chain_data:/chain_data
     ports:
-      - '9005:9005' # p2p
+      - '9005:9005/tcp' # p2p
       - '9005:9005/udp' # p2p
       - 127.0.0.1:5065:5065 # metrics
       - 127.0.0.1:9550:9550 # RPC port

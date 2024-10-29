@@ -17,6 +17,8 @@ else
   echo "File /chain_data/jwt.txt already exists"
 fi
 
+PUBLIC_IP=$(curl -s v4.ident.me)
+
 exec op-reth node \
   --engine.experimental \
   --config="$CONFIG_PATH" \
@@ -39,11 +41,12 @@ exec op-reth node \
   --ws.api="debug,eth,net,trace" \
   --metrics="0.0.0.0:5060" \
   --port="30305" \
+  --discovery.v5.port="9004" \
   --discovery.port="30305" \
   --log.file.directory="/chain_data/reth-logs/" \
   --log.file.filter="debug" \
   --log.file.format="json" \
   --log.file.max-files="10" \
-  --nat="extip:0.0.0.0" \
+  --nat="extip:$PUBLIC_IP" \
   --rpc-max-response-size="300" \
   --bootnodes="$EXECUTION_BOOTNODES"

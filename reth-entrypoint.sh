@@ -20,7 +20,6 @@ fi
 PUBLIC_IP=$(curl -s v4.ident.me)
 
 exec op-reth node \
-  --engine.experimental \
   --config="$CONFIG_PATH" \
   --chain="$GENESIS_PATH" \
   --rollup.sequencer-http "$SEQUENCER_URL" \

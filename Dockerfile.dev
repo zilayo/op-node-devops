@@ -3,8 +3,7 @@ FROM rust:1.82 AS reth
 WORKDIR /app
 RUN apt-get update && apt-get -y upgrade && apt-get install -y git libclang-dev pkg-config curl build-essential
 ENV REPO=https://github.com/zilayo/reth.git
-ENV VERSION=v1.1.0
-ENV COMMIT=5bdcd50cdab11ee73a90de019d4854afb6dbf900
+ENV COMMIT=2f8a2f0fbb29019c11a0e495528146fdcc09229c
 ENV RUSTFLAGS="-C target-cpu=native"
 RUN git clone $REPO . && \
   git fetch --depth 1 origin $COMMIT && git checkout $COMMIT && \
@@ -12,7 +11,7 @@ RUN git clone $REPO . && \
   mv /app/target/maxperf/op-reth /usr/local/bin/op-reth
 
 # Build the op-node layer
-FROM us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.9.4 AS op-node
+FROM us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.9.5 AS op-node
 
 # Build the final layer & copy node binaries
 FROM ubuntu:22.04

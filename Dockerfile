@@ -1,8 +1,8 @@
 # Build the op-reth layers
-FROM ghcr.io/paradigmxyz/op-reth:v1.1.0 AS reth
+FROM ghcr.io/paradigmxyz/op-reth:v1.1.1 AS reth
 
 # Build the op-node layer
-FROM us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.9.4 AS op-node
+FROM us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.9.5 AS op-node
 
 # Build the final layer & copy node binaries
 FROM ubuntu:22.04

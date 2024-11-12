@@ -30,7 +30,7 @@ clean_threshold = 500000
 commit_threshold = 100000
 
 [stages.merkle]
-clean_threshold = 50000
+clean_threshold = 5000
 
 [stages.transaction_lookup]
 chunk_size = 5000000

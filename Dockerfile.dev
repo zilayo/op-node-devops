@@ -11,7 +11,7 @@ RUN git clone $REPO . && \
   mv /app/target/maxperf/op-reth /usr/local/bin/op-reth
 
 # Build the op-node layer
-FROM us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.9.5 AS op-node
+FROM us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.10.2 AS op-node
 
 # Build the final layer & copy node binaries
 FROM ubuntu:22.04
